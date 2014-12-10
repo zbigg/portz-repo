@@ -1,0 +1,5 @@
+name=iperf
+version=3.0.6
+baseurl=https://github.com/esnet/iperf/archive/${version}.tar.gz
+web=https://github.com/esnet/iperf
+stereotype=auto
