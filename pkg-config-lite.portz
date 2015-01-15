@@ -1,0 +1,6 @@
+name=pkg-config-lite
+version=0.28-1
+
+baseurl=http://sourceforge.net/projects/pkgconfiglite/files/${version}/pkg-config-lite-${version}.tar.gz
+web=http://sourceforge.net/projects/pkgconfiglite/
+stereotype=auto
