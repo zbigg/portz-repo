@@ -1,0 +1,20 @@
+name=redis
+version=3.0.1
+baseurl=http://download.redis.io/releases/redis-3.0.1.tar.gz
+sha1sum=fe1d06599042bfe6a0e738542f302ce9533dde88
+
+patch_step()
+{
+    patch -p1 < ${package_folder}/redis-cygwin.patch
+}
+
+build_step()
+{
+    portz_invoke ${MAKE_PARALLEL} -C deps lua hiredis linenoise
+    portz_invoke ${MAKE_PARALLEL}
+}
+
+install_staging_step()
+{
+    portz_invoke ${MAKE_PARALLEL} install PREFIX=${DESTDIR}${prefix}
+}

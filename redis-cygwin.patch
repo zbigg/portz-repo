@@ -1,0 +1,37 @@
+diff -u -r --exclude-from /e/work/sdk/cygwin/bin/../lib/portz//portz_make_patch_diff_exclude.diff redis-3.0.1-portz-orig/deps/hiredis/net.c redis-3.0.1/deps/hiredis/net.c
+--- redis-3.0.1-portz-orig/deps/hiredis/net.c	2015-05-25 10:59:14.702204400 +0200
++++ redis-3.0.1/deps/hiredis/net.c	2015-05-25 10:11:49.677753100 +0200
+@@ -139,19 +139,23 @@
+     }
+ #else
+ #ifndef __sun
++#ifdef TCP_KEEPIDLE
+     val = interval;
+     if (setsockopt(fd, IPPROTO_TCP, TCP_KEEPIDLE, &val, sizeof(val)) < 0) {
+         __redisSetError(c,REDIS_ERR_OTHER,strerror(errno));
+         return REDIS_ERR;
+     }
+-
++#endif
++#ifdef TCP_KEEPINTVL
+     val = interval/3;
+     if (val == 0) val = 1;
+     if (setsockopt(fd, IPPROTO_TCP, TCP_KEEPINTVL, &val, sizeof(val)) < 0) {
+         __redisSetError(c,REDIS_ERR_OTHER,strerror(errno));
+         return REDIS_ERR;
+     }
++#endif
+ 
++#ifdef  TCP_KEEPCNT
+     val = 3;
+     if (setsockopt(fd, IPPROTO_TCP, TCP_KEEPCNT, &val, sizeof(val)) < 0) {
+         __redisSetError(c,REDIS_ERR_OTHER,strerror(errno));
+@@ -159,6 +163,7 @@
+     }
+ #endif
+ #endif
++#endif
+ 
+     return REDIS_OK;
+ }
+
