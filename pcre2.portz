@@ -1,0 +1,8 @@
+version=10.36
+baseurl=https://ftp.pcre.org/pub/pcre/pcre2-${version}.tar.bz2
+web=http://www.pcre.org/
+sha1sum=65958cfc799c1474a272938f5690dff5f10db216
+
+configure_options="--enable-utf8 --enable-unicode-properties"
+
+stereotype="gnu"
